@@ -1,0 +1,1105 @@
+
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customizable Resume</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #dbeafe;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --border: #e2e8f0;
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-family);
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background-color: white;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .resume-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .resume-header h1 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .section-content {
+            padding-left: 1rem;
+        }
+
+        .item {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background-color: white;
+        }
+
+        .item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .item-subtitle {
+            color: var(--gray);
+        }
+
+        .item-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .item-description {
+            margin-top: 0.5rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        .btn-small {
+            padding: 0.2rem 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .btn-danger {
+            background-color: #ef4444;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        .item-actions {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+
+        .form-group input, 
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .print-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+        }
+
+        .customize-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 10rem;
+            z-index: 100;
+        }
+
+        .profile-photo-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            border: 3px solid var(--primary);
+            position: relative;
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-size: 3rem;
+        }
+
+        .photo-upload-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .color-preview {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-left: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .customize-section {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .customize-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .customize-section h4 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .color-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+            }
+            
+            .container {
+                box-shadow: none;
+                margin: 0;
+                padding: 1rem;
+                max-width: 100%;
+            }
+            
+            .item-actions, 
+            .section-actions, 
+            .print-btn,
+            .customize-btn,
+            .photo-upload-btn,
+            .btn {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+            
+            .resume-header h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .profile-photo-container {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="resume">
+        <header class="resume-header">
+            <div class="profile-photo-container" id="photo-container">
+                <div class="photo-placeholder" id="photo-placeholder">
+                    <span>📷</span>
+                </div>
+                <img class="profile-photo" id="profile-photo" style="display: none;" alt="Profile Photo">
+                <button class="photo-upload-btn" onclick="document.getElementById('photo-upload').click()">+</button>
+                <input type="file" id="photo-upload" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
+            </div>
+            <h1 id="fullName">Your Name</h1>
+            <p id="title">Professional Title</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="bi bi-envelope-fill"></i>
+                    <span id="email">your.email@example.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+
+                    <span id="phone">(123) 456-7890</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="location">City, State</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-link"></i>
+                    <span id="website">yourwebsite.com</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="section" id="summary-section">
+            <div class="section-header">
+                <h2 class="section-title">Professional Summary</h2>
+                <button class="btn btn-small" onclick="editSummary()">Edit</button>
+            </div>
+            <div class="section-content">
+                <p id="summary">Experienced professional with a proven track record of success in [your field]. Skilled in [key skills] with a focus on delivering [key outcomes]. Passionate about [your passion] and committed to [your values].</p>
+            </div>
+        </section>
+
+        <section class="section" id="experience-section">
+            <div class="section-header">
+                <h2 class="section-title">Work Experience</h2>
+                <div class="section-actions">
+                    <button class="btn btn-small" onclick="showAddItemModal('experience')">Add Experience</button>
+                </div>
+            </div>
+            <div class="section-content" id="experience-items">
+                <div class="item" data-id="exp1">
+                    <div class="item-actions">
+                        <button class="btn btn-small" onclick="editItem('experience', 'exp1')">Edit</button>
+                        <button class="btn btn-small btn-danger" onclick="removeItem('exp1')">Remove</button>
+                    </div>
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">Job Title</div>
+                            <div class="item-subtitle">Company Name</div>
+                        </div>
+                       
+                    </div>
+                    <div class="item-description">
+                        <p>Describe your responsibilities and achievements in this role. Focus on quantifiable results and key contributions.</p>
+                    </div>
+                </div>
+                <div class="item" data-id="exp2">
+                    <div class="item-actions">
+                        <button class="btn btn-small" onclick="editItem('experience', 'exp2')">Edit</button>
+                        <button class="btn btn-small btn-danger" onclick="removeItem('exp2')">Remove</button>
+                    </div>
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">Previous Job Title</div>
+                            <div class="item-subtitle">Previous Company</div>
+                        </div>
+                        
+                    </div>
+                    <div class="item-description">
+                        <p>Describe your responsibilities and achievements in this role. Focus on quantifiable results and key contributions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="education-section">
+            <div class="section-header">
+                <h2 class="section-title">Education</h2>
+                <div class="section-actions">
+                    <button class="btn btn-small" onclick="showAddItemModal('education')">Add Education</button>
+                </div>
+            </div>
+            <div class="section-content" id="education-items">
+                <div class="item" data-id="edu1">
+                    <div class="item-actions">
+                        <button class="btn btn-small" onclick="editItem('education', 'edu1')">Edit</button>
+                        <button class="btn btn-small btn-danger" onclick="removeItem('edu1')">Remove</button>
+                    </div>
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">Degree Name</div>
+                            <div class="item-subtitle">University Name</div>
+                        </div>
+                    </div>
+                    <div class="item-description">
+                        <p>Relevant coursework, achievements, or activities during your education.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="skills-section">
+            <div class="section-header">
+                <h2 class="section-title">Skills</h2>
+                <div class="section-actions">
+                    <button class="btn btn-small" onclick="showAddSkillModal()">Add Skill</button>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="skills-list" id="skills-list">
+                    <div class="skill" data-id="skill1">
+                        Skill 1
+                        <button class="btn btn-small btn-danger" onclick="removeSkill('skill1')" style="margin-left: 5px; padding: 0 5px;">×</button>
+                    </div>
+                    <div class="skill" data-id="skill2">
+                        Skill 2
+                        <button class="btn btn-small btn-danger" onclick="removeSkill('skill2')" style="margin-left: 5px; padding: 0 5px;">×</button>
+                    </div>
+                    <div class="skill" data-id="skill3">
+                        Skill 3
+                        <button class="btn btn-small btn-danger" onclick="removeSkill('skill3')" style="margin-left: 5px; padding: 0 5px;">×</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="projects-section">
+            <div class="section-header">
+                <h2 class="section-title">Projects</h2>
+                <div class="section-actions">
+                    <button class="btn btn-small" onclick="showAddItemModal('project')">Add Project</button>
+                </div>
+            </div>
+            <div class="section-content" id="project-items">
+                <div class="item" data-id="proj1">
+                    <div class="item-actions">
+                        <button class="btn btn-small" onclick="editItem('project', 'proj1')">Edit</button>
+                        <button class="btn btn-small btn-danger" onclick="removeItem('proj1')">Remove</button>
+                    </div>
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">Project Name</div>
+                        </div>
+                    </div>
+                    <div class="item-description">
+                        <p>Description of the project, technologies used, and your role in it.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add more sections as needed -->
+        <button class="btn" id="add-section-btn" onclick="showAddSectionModal()">Add New Section</button>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="edit-summary-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Professional Summary</h3>
+                <button class="close-modal" onclick="closeModal('edit-summary-modal')">×</button>
+            </div>
+            <form id="summary-form">
+                <div class="form-group">
+                    <label for="summary-text">Professional Summary</label>
+                    <textarea id="summary-text" name="summary"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" onclick="closeModal('edit-summary-modal')">Cancel</button>
+                    <button type="submit" class="btn">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="add-item-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="item-modal-title">Add Item</h3>
+                <button class="close-modal" onclick="closeModal('add-item-modal')">×</button>
+            </div>
+            <form id="item-form">
+                <input type="hidden" id="item-type" name="type">
+                <input type="hidden" id="item-id" name="id">
+                <div class="form-group">
+                    <label for="item-title">Title</label>
+                    <input type="text" id="item-title-input" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="item-subtitle">Subtitle</label>
+                    <input type="text" id="item-subtitle-input" name="subtitle">
+                </div>
+                <div class="form-group">
+                    <label for="item-date">Date</label>
+                    <input type="text" id="item-date-input" name="date" placeholder="e.g., Jan 2020 - Present">
+                </div>
+                <div class="form-group">
+                    <label for="item-description">Description</label>
+                    <textarea id="item-description-input" name="description"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" onclick="closeModal('add-item-modal')">Cancel</button>
+                    <button type="submit" class="btn">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="add-skill-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Skill</h3>
+                <button class="close-modal" onclick="closeModal('add-skill-modal')">×</button>
+            </div>
+            <form id="skill-form">
+                <div class="form-group">
+                    <label for="skill-name">Skill Name</label>
+                    <input type="text" id="skill-name" name="skill" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" onclick="closeModal('add-skill-modal')">Cancel</button>
+                    <button type="submit" class="btn">Add Skill</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="add-section-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Section</h3>
+                <button class="close-modal" onclick="closeModal('add-section-modal')">×</button>
+            </div>
+            <form id="section-form">
+                <div class="form-group">
+                    <label for="section-title">Section Title</label>
+                    <input type="text" id="section-title-input" name="title" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" onclick="closeModal('add-section-modal')">Cancel</button>
+                    <button type="submit" class="btn">Add Section</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="edit-header-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Personal Information</h3>
+                <button class="close-modal" onclick="closeModal('edit-header-modal')">×</button>
+            </div>
+            <form id="header-form">
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="job-title">Professional Title</label>
+                    <input type="text" id="job-title" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="email-input">Email</label>
+                    <input type="email" id="email-input" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="phone-input">Phone</label>
+                    <input type="tel" id="phone-input" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="location-input">Location</label>
+                    <input type="text" id="location-input" name="location">
+                </div>
+                <div class="form-group">
+                    <label for="website-input">Website</label>
+                    <input type="text" id="website-input" name="website">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" onclick="closeModal('edit-header-modal')">Cancel</button>
+                    <button type="submit" class="btn">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Customize Modal -->
+    <div class="modal" id="customize-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Customize Resume</h3>
+                <button class="close-modal" onclick="closeModal('customize-modal')">×</button>
+            </div>
+            <form id="customize-form">
+                <div class="customize-section">
+                    <h4>Colors</h4>
+                    <div class="color-options">
+                        <div class="form-group">
+                            <label for="primary-color">Primary Color</label>
+                            <div style="display: flex; align-items: center;">
+                                <input type="color" id="primary-color" name="primaryColor" value="#2563eb">
+                                <span class="color-preview" id="primary-color-preview" style="background-color: #2563eb;"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="text-color">Text Color</label>
+                            <div style="display: flex; align-items: center;">
+                                <input type="color" id="text-color" name="textColor" value="#1e293b">
+                                <span class="color-preview" id="text-color-preview" style="background-color: #1e293b;"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="customize-section">
+                    <h4>Font</h4>
+                    <div class="form-group">
+                        <label for="font-family">Font Family</label>
+                        <select id="font-family" name="fontFamily">
+                            <option value="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Segoe UI (Default)</option>
+                            <option value="'Arial', sans-serif">Arial</option>
+                            <option value="'Helvetica', sans-serif">Helvetica</option>
+                            <option value="'Georgia', serif">Georgia</option>
+                            <option value="'Calibri', sans-serif">Calibri</option>
+                            <option value="'Times New Roman', serif">Times New Roman</option>
+                            <option value="'Verdana', sans-serif">Verdana</option>
+                            <option value="'Tahoma', sans-serif">Tahoma</option>
+                            <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn" onclick="closeModal('customize-modal')">Cancel</button>
+                    <button type="submit" class="btn">Apply Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <button class="btn print-btn" onclick="window.print()">Print Resume</button> <br>
+    <button class="btn customize-btn" onclick="showCustomizeModal()">Customize</button>
+
+    <script>
+        // Initialize event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make header editable
+            document.querySelector('.resume-header').addEventListener('click', function(e) {
+                // Don't trigger edit header when clicking on photo container
+                if (!e.target.closest('.profile-photo-container')) {
+                    editHeader();
+                }
+            });
+            
+            // Initialize forms
+            document.getElementById('summary-form').addEventListener('submit', saveSummary);
+            document.getElementById('item-form').addEventListener('submit', saveItem);
+            document.getElementById('skill-form').addEventListener('submit', addSkill);
+            document.getElementById('section-form').addEventListener('submit', addSection);
+            document.getElementById('header-form').addEventListener('submit', saveHeader);
+            document.getElementById('customize-form').addEventListener('submit', applyCustomization);
+            
+            // Initialize color pickers
+            document.getElementById('primary-color').addEventListener('input', function() {
+                document.getElementById('primary-color-preview').style.backgroundColor = this.value;
+            });
+            
+            document.getElementById('text-color').addEventListener('input', function() {
+                document.getElementById('text-color-preview').style.backgroundColor = this.value;
+            });
+        });
+
+        // Photo upload handling
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if (!file.type.match('image.*')) {
+                alert('Please select an image file');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const photoPlaceholder = document.getElementById('photo-placeholder');
+                const profilePhoto = document.getElementById('profile-photo');
+                
+                profilePhoto.src = e.target.result;
+                profilePhoto.style.display = 'block';
+                photoPlaceholder.style.display = 'none';
+            };
+            
+            reader.readAsDataURL(file);
+        }
+
+        // Customization functions
+        function showCustomizeModal() {
+            // Set current values
+            const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+            const textColor = getComputedStyle(document.documentElement).getPropertyValue('--dark').trim();
+            const fontFamily = getComputedStyle(document.documentElement).getPropertyValue('--font-family').trim();
+            
+            document.getElementById('primary-color').value = primaryColor || '#2563eb';
+            document.getElementById('text-color').value = textColor || '#1e293b';
+            
+            // Try to match the font family
+            const fontSelect = document.getElementById('font-family');
+            for (let i = 0; i < fontSelect.options.length; i++) {
+                if (fontSelect.options[i].value === fontFamily) {
+                    fontSelect.selectedIndex = i;
+                    break;
+                }
+            }
+            
+            showModal('customize-modal');
+        }
+
+        function applyCustomization(e) {
+            e.preventDefault();
+            
+            const primaryColor = document.getElementById('primary-color').value;
+            const textColor = document.getElementById('text-color').value;
+            const fontFamily = document.getElementById('font-family').value;
+            
+            // Update CSS variables
+            document.documentElement.style.setProperty('--primary', primaryColor);
+            document.documentElement.style.setProperty('--primary-light', adjustColor(primaryColor, 40));
+            document.documentElement.style.setProperty('--dark', textColor);
+            document.documentElement.style.setProperty('--font-family', fontFamily);
+            
+            closeModal('customize-modal');
+        }
+        
+        // Helper function to lighten a color for primary-light
+        function adjustColor(color, percent) {
+            let R = parseInt(color.substring(1,3),16);
+            let G = parseInt(color.substring(3,5),16);
+            let B = parseInt(color.substring(5,7),16);
+
+            R = parseInt(R * (100 + percent) / 100);
+            G = parseInt(G * (100 + percent) / 100);
+            B = parseInt(B * (100 + percent) / 100);
+
+            R = (R<255)?R:255;  
+            G = (G<255)?G:255;  
+            B = (B<255)?B:255;  
+
+            const RR = ((R.toString(16).length==1)?"0"+R.toString(16):R.toString(16));
+            const GG = ((G.toString(16).length==1)?"0"+G.toString(16):G.toString(16));
+            const BB = ((B.toString(16).length==1)?"0"+B.toString(16):B.toString(16));
+
+            return "#"+RR+GG+BB;
+        }
+
+        // Modal functions
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Header functions
+        function editHeader() {
+            const fullNameInput = document.getElementById('full-name');
+            const jobTitleInput = document.getElementById('job-title');
+            const emailInput = document.getElementById('email-input');
+            const phoneInput = document.getElementById('phone-input');
+            const locationInput = document.getElementById('location-input');
+            const websiteInput = document.getElementById('website-input');
+
+            fullNameInput.value = document.getElementById('fullName').textContent;
+            jobTitleInput.value = document.getElementById('title').textContent;
+            emailInput.value = document.getElementById('email').textContent;
+            phoneInput.value = document.getElementById('phone').textContent;
+            locationInput.value = document.getElementById('location').textContent;
+            websiteInput.value = document.getElementById('website').textContent;
+
+            showModal('edit-header-modal');
+        }
+
+        function saveHeader(e) {
+            e.preventDefault();
+            
+            document.getElementById('fullName').textContent = document.getElementById('full-name').value;
+            document.getElementById('title').textContent = document.getElementById('job-title').value;
+            document.getElementById('email').textContent = document.getElementById('email-input').value;
+            document.getElementById('phone').textContent = document.getElementById('phone-input').value;
+            document.getElementById('location').textContent = document.getElementById('location-input').value;
+            document.getElementById('website').textContent = document.getElementById('website-input').value;
+            
+            closeModal('edit-header-modal');
+        }
+
+        // Summary functions
+        function editSummary() {
+            const summaryText = document.getElementById('summary').textContent;
+            document.getElementById('summary-text').value = summaryText;
+            showModal('edit-summary-modal');
+        }
+
+        function saveSummary(e) {
+            e.preventDefault();
+            const summaryText = document.getElementById('summary-text').value;
+            document.getElementById('summary').textContent = summaryText;
+            closeModal('edit-summary-modal');
+        }
+
+        // Item functions (experience, education, projects)
+        function showAddItemModal(type) {
+            document.getElementById('item-type').value = type;
+            document.getElementById('item-id').value = '';
+            
+            // Clear form
+            document.getElementById('item-title-input').value = '';
+            document.getElementById('item-subtitle-input').value = '';
+            document.getElementById('item-date-input').value = '';
+            document.getElementById('item-description-input').value = '';
+            
+            // Set modal title
+            let modalTitle = 'Add ';
+            if (type === 'experience') modalTitle += 'Experience';
+            else if (type === 'education') modalTitle += 'Education';
+            else if (type === 'project') modalTitle += 'Project';
+            document.getElementById('item-modal-title').textContent = modalTitle;
+            
+            showModal('add-item-modal');
+        }
+
+        function editItem(type, id) {
+            const item = document.querySelector(`[data-id="${id}"]`);
+            if (!item) return;
+            
+            const title = item.querySelector('.item-title').textContent;
+            const subtitle = item.querySelector('.item-subtitle')?.textContent || '';
+            const date = item.querySelector('.item-date')?.textContent || '';
+            const description = item.querySelector('.item-description p')?.textContent || '';
+            
+            document.getElementById('item-type').value = type;
+            document.getElementById('item-id').value = id;
+            document.getElementById('item-title-input').value = title;
+            document.getElementById('item-subtitle-input').value = subtitle;
+            document.getElementById('item-date-input').value = date;
+            document.getElementById('item-description-input').value = description;
+            
+            // Set modal title
+            let modalTitle = 'Edit ';
+            if (type === 'experience') modalTitle += 'Experience';
+            else if (type === 'education') modalTitle += 'Education';
+            else if (type === 'project') modalTitle += 'Project';
+            document.getElementById('item-modal-title').textContent = modalTitle;
+            
+            showModal('add-item-modal');
+        }
+
+        function saveItem(e) {
+            e.preventDefault();
+            
+            const type = document.getElementById('item-type').value;
+            const id = document.getElementById('item-id').value;
+            const title = document.getElementById('item-title-input').value;
+            const subtitle = document.getElementById('item-subtitle-input').value;
+            const date = document.getElementById('item-date-input').value;
+            const description = document.getElementById('item-description-input').value;
+            
+            if (id) {
+                // Edit existing item
+                const item = document.querySelector(`[data-id="${id}"]`);
+                if (item) {
+                    item.querySelector('.item-title').textContent = title;
+                    if (item.querySelector('.item-subtitle')) {
+                        item.querySelector('.item-subtitle').textContent = subtitle;
+                    }
+                    if (item.querySelector('.item-date')) {
+                        item.querySelector('.item-date').textContent = date;
+                    }
+                    if (item.querySelector('.item-description p')) {
+                        item.querySelector('.item-description p').textContent = description;
+                    }
+                }
+            } else {
+                // Add new item
+                const newId = `${type}${Date.now()}`;
+                const container = document.getElementById(`${type}-items`);
+                
+                const itemHTML = `
+                    <div class="item" data-id="${newId}">
+                        <div class="item-actions">
+                            <button class="btn btn-small" onclick="editItem('${type}', '${newId}')">Edit</button>
+                            <button class="btn btn-small btn-danger" onclick="removeItem('${newId}')">Remove</button>
+                        </div>
+                        <div class="item-header">
+                            <div>
+                                <div class="item-title">${title}</div>
+                                ${subtitle ? `<div class="item-subtitle">${subtitle}</div>` : ''}
+                            </div>
+                            ${date ? `<div class="item-date">${date}</div>` : ''}
+                        </div>
+                        <div class="item-description">
+                            <p>${description}</p>
+                        </div>
+                    </div>
+                `;
+                
+                container.insertAdjacentHTML('beforeend', itemHTML);
+            }
+            
+            closeModal('add-item-modal');
+        }
+
+        function removeItem(id) {
+            if (confirm('Are you sure you want to remove this item?')) {
+                const item = document.querySelector(`[data-id="${id}"]`);
+                if (item) {
+                    item.remove();
+                }
+            }
+        }
+
+        // Skills functions
+        function showAddSkillModal() {
+            document.getElementById('skill-name').value = '';
+            showModal('add-skill-modal');
+        }
+
+        function addSkill(e) {
+            e.preventDefault();
+            
+            const skillName = document.getElementById('skill-name').value;
+            if (!skillName) return;
+            
+            const skillId = `skill${Date.now()}`;
+            const skillHTML = `
+                <div class="skill" data-id="${skillId}">
+                    ${skillName}
+                    <button class="btn btn-small btn-danger" onclick="removeSkill('${skillId}')" style="margin-left: 5px; padding: 0 5px;">×</button>
+                </div>
+            `;
+            
+            document.getElementById('skills-list').insertAdjacentHTML('beforeend', skillHTML);
+            closeModal('add-skill-modal');
+        }
+
+        function removeSkill(id) {
+            const skill = document.querySelector(`[data-id="${id}"]`);
+            if (skill) {
+                skill.remove();
+            }
+        }
+
+        // Section functions
+        function showAddSectionModal() {
+            document.getElementById('section-title-input').value = '';
+            showModal('add-section-modal');
+        }
+
+        function addSection(e) {
+            e.preventDefault();
+            
+            const sectionTitle = document.getElementById('section-title-input').value;
+            if (!sectionTitle) return;
+            
+            const sectionId = `section-${sectionTitle.toLowerCase().replace(/\s+/g, '-')}`;
+            const sectionHTML = `
+                <section class="section" id="${sectionId}">
+                    <div class="section-header">
+                        <h2 class="section-title">${sectionTitle}</h2>
+                        <div class="section-actions">
+                            <button class="btn btn-small" onclick="showAddItemModal('${sectionId}')">Add Item</button>
+                            <button class="btn btn-small btn-danger" onclick="removeSection('${sectionId}')">Remove Section</button>
+                        </div>
+                    </div>
+                    <div class="section-content" id="${sectionId}-items">
+                        <!-- Items will be added here -->
+                    </div>
+                </section>
+            `;
+            
+            // Insert the new section before the "Add New Section" button
+            document.getElementById('add-section-btn').insertAdjacentHTML('beforebegin', sectionHTML);
+            closeModal('add-section-modal');
+        }
+
+        function removeSection(id) {
+            if (confirm('Are you sure you want to remove this section?')) {
+                const section = document.getElementById(id);
+                if (section) {
+                    section.remove();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+{% endblock content %}

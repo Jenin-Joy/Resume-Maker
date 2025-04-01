@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Timeline Style</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .resume-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            background: #2c3e50;
+            color: #fff;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .header img:hover {
+            transform: scale(1.05);
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .contact-info a {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px dashed #fff;
+        }
+
+        .contact-info a:hover {
+            border-bottom-style: solid;
+        }
+
+        /* Main Content */
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+        
+
+        /* Skills Section */
+        .skills-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .skills-list .skill-name {
+            width: 25%;
+            font-weight: bold;
+        }
+
+        .skills-list .skill-bar {
+            width: 70%;
+            height: 8px;
+            background: #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skills-list .skill-bar span {
+            display: block;
+            height: 100%;
+            background: #3498db;
+            animation: fillBar 1.5s ease-out forwards;
+        }
+
+        @keyframes fillBar {
+            from { width: 0; }
+            to { width: var(--skill-width); }
+        }
+
+        /* Timeline Section */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #3498db;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -29px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border: 3px solid #3498db;
+            border-radius: 50%;
+        }
+
+        .timeline-item h3 {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .timeline-item .date {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item p {
+            font-size: 14px;
+        }
+
+        /* Hobbies and Certificates */
+        .hobbies-list,
+        .certificates-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .hobbies-list li,
+        .certificates-list li {
+            background: #ecf0f1;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .certificates-list li a {
+            color: #3498db;
+            text-decoration: none;
+            margin-left: 5px;
+        }
+
+        .certificates-list li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Print Button */
+        .print-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .print-button:hover {
+            background: #2980b9;
+        }
+
+        /* Responsive Design */
+        @media print {
+    body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+@media print {
+    .resume {
+        page-break-after: always; /* Ensures full-page printing */
+    }
+    .resume_left, .resume_right {
+        page-break-inside: avoid;
+    }
+}
+@page {
+    size: A4;
+    margin: 10mm;
+}
+        @media (max-width: 600px) {
+            .resume-container {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .header img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .skills-list .skill-name {
+                width: 35%;
+            }
+
+            .skills-list .skill-bar {
+                width: 60%;
+            }
+
+            .timeline {
+                padding-left: 20px;
+            }
+
+            .timeline::before {
+                left: 10px;
+            }
+
+            .timeline-item::before {
+                left: -24px;
+            }
+        }
+        @media print {
+            body, html {
+                margin: 0;
+                padding: 0;
+                background-color: white;
+            }
+            .print-button {
+                display: none;
+            }
+            .page {
+                box-shadow: none;
+                width: 100%;
+                min-height: 0;
+                height: auto;
+                margin: 0;
+            }
+            .left, .right {
+                page-break-inside: avoid;
+            }
+            @page {
+                size: A4;
+                margin: 0mm;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button" onclick="printCV()">Print Resume</button>
+
+    <!-- <button class="print-button" onclick="window.print()">Download Resume</button> -->
+
+    <div class="resume-container">
+        <div class="header">
+            <img src="{{ user.UserRegistration_photo.url | default:'https://via.placeholder.com/120' }}" alt="Profile Pic">
+            <h1>{{ user.UserRegistration_name }}</h1>
+            <p>{{ user.Designation }}</p>
+            <div class="contact-info">
+                <p>Phone: <a href="tel:{{ user.UserRegistration_contact }}">{{ user.UserRegistration_contact }}</a></p>
+                <p>Email: <a href="mailto:{{ user.UserRegistration_email }}">{{ user.UserRegistration_email }}</a></p>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>About Me</h2>
+                <p>{% for about in about %} {{ about.about_name }} {% endfor %}</p>
+            </div>
+            
+
+            <div class="section">
+                <h2>Skills</h2>
+                <ul class="skills-list">
+                    {% for skill in skills %}
+                    <li>
+                        <div class="skill-name">{{ skill.skill_name }}</div>
+                        <div class="skill-bar">
+                            <span style="--skill-width: {{ skill.percentage | default:'80' }}%;"></span>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Experience</h2>
+                <div class="timeline">
+                    {% for exp in experience %}
+                    <div class="timeline-item">
+                        <h3>{{ exp.Experience_Jobtitle }} at {{ exp.Experience_Companyname }}</h3>
+                        <div class="date">{{ exp.Experience_Startdate }} - {{ exp.Experience_Enddate }}</div>
+                        <p>{{ exp.Experience_Description }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Education</h2>
+                <div class="timeline">
+                    {% for edu in education %}
+                    <div class="timeline-item">
+                        <h3>{{ edu.Education_Institution }}  {{ edu.Education_Course.educationtype.educationtype}}- {{ edu.Education_Course.course}} </h3>
+                        <div class="date">{{ edu.Education_StartDate }} - {{ edu.Education_EndDate }}</div>
+                        <p>{{ edu.Education_Graduation }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            
+            <div class="section">
+                <h2>Languages</h2>
+                <ul class="projects-list">
+                    {% for lang in languages %}
+                    <li>
+                        <strong>{{ lang.language_name }} ({{ lang.language_level }})</strong>
+                        
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Projects</h2>
+                <ul class="projects-list">
+                    {% for project in projects %}
+                    <li>
+                        <strong>{{ project.Project_Name }}</strong>: {{ project.Project_Details }}
+                        <a href="{{ project.Project_Link }}" target="_blank">View Project</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Certificates</h2>
+                <ul class="certificates-list">
+                    {% for certificate in certificates %}
+                    <li>{{ certificate.certificate_name }}
+                        {% if certificate.certificate_upload %}
+                        <a href="{{ certificate.certificate_upload.url }}" target="_blank">Download</a>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Hobbies</h2>
+                <ul class="hobbies-list">
+                    {% for hobby in hobbies %}
+                    <li>{{ hobby.hobbies_name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>References</h2>
+                <ul class="references-list">
+                    {% for reference in references %}
+                    <li>
+                        <strong>{{ reference.reference_name }}</strong> - {{ reference.reference_relation }}<br>
+                        Email: {{ reference.reference_email }} | Phone: {{ reference.reference_contact }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        function printCV() {
+            window.print();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Index - iPortfolio Bootstrap Template</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{%static 'Main/assets/img/favicon.png'%}" rel="icon">
+    <link href="{%static 'Main/assets/img/apple-touch-icon.png'%}" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{%static 'Main/assets/vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{%static 'Main/assets/vendor/bootstrap-icons/bootstrap-icons.css'%}" rel="stylesheet">
+    <link href="{%static 'Main/assets/vendor/aos/aos.css'%}" rel="stylesheet">
+    <link href="{%static 'Main/assets/vendor/glightbox/css/glightbox.min.css'%}" rel="stylesheet">
+    <link href="{%static 'Main/assets/vendor/swiper/swiper-bundle.min.css'%}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{%static 'Main/assets/css/main.css'%}" rel="stylesheet">
+    <style>
+        .custom-btn {
+          background-color: #12c745; /* Primary blue */
+          color: white;
+          font-size: 18px;
+          padding: 12px 24px;
+          border-radius: 8px;
+          transition: all 0.3s ease-in-out;
+          display: inline-flex;
+          align-items: center;
+          text-decoration: none;
+          font-weight: bold;
+        }
+      
+        .custom-btn:hover {
+          background-color: #0056b3; /* Darker blue */
+          transform: scale(1.1);
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+      
+        .custom-btn i {
+          margin-left: 8px;
+          transition: transform 0.3s ease-in-out;
+        }
+      
+        .custom-btn:hover i {
+          transform: translateX(5px);
+        }
+      </style>
+
+
+    <!-- =======================================================
+  * Template Name: iPortfolio
+  * Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
+  * Updated: Jun 29 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+</head>
+
+<body class="index-page">
+
+    <header id="header" class="header dark-background d-flex flex-column">
+        <i class="header-toggle d-xl-none bi bi-list"></i>
+
+        <div class="profile-img">
+            <img src="{%static 'Main/assets/img/RM.jpg'%}" alt="" class="img-fluid rounded-circle">
+        </div>
+
+        <a href="index.html" class="logo d-flex align-items-center justify-content-center">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <!-- <img src="assets/img/logo.png" alt=""> -->
+            <h1 class="sitename">ResuMate</h1>
+        </a>
+
+        <div class="social-links text-center">
+            <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        </div>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
+                <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
+                <li><a href="#about"><i class="bi bi-person navicon"></i> About</a></li>
+                
+                <!-- <li><a href="#contact"><i class="bi bi-envelope navicon"></i> Feedback</a></li> -->
+            </ul>
+        </nav>
+
+    </header>
+
+    <main class="main">
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero section dark-background">
+
+            <img src="{%static 'Main/assets/mypf.jpg'%}" alt="" data-aos="fade-in" class="">
+
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <h2>RESUMATE</h2>
+                <p>I'm <span class="typed"
+                        data-typed-items="Designer, Developer, Freelancer, Photographer">Designer</span><span
+                        class="typed-cursor typed-cursor--blink" aria-hidden="true"></span><span
+                        class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
+            </div>
+
+        </section><!-- /Hero Section -->
+        
+        <section id="resume" class="resume section"><!-- /Resume Section -->
+
+            <!-- Section Title -->
+            <div class="container section-title text-center" data-aos="fade-up">
+                <a href="{% url 'Guest:Login' %}" class="btn custom-btn">
+                    Create My Resume <i class="bi bi-arrow-right"></i>
+                  </a>
+                  
+        
+                
+            </div><!-- End Section Title -->
+        </section><!-- /Resume Section -->
+
+
+        <!-- About Section -->
+        <section id="about" class="about section">
+
+            <!-- Section Title -->
+            <div class="container section-title" data-aos="fade-up">
+                <h2>About</h2>
+                <p>The Resume Builder Project is an innovative solution designed to simplify and enhance the process of creating professional resumes. This tool leverages user-friendly interfaces and customizable templates to help individuals craft visually appealing and content-rich resumes tailored to specific industries and job roles. Key features include dynamic form-based input for capturing user details, pre-designed templates for consistency, automated formatting, and the option to export resumes in multiple formats such as PDF and Word.
+                </p>
+            </div><!-- End Section Title -->
+
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="row gy-4 justify-content-center">
+                    <div class="col-lg-4">
+                        <img src="{%static 'Main/assets/img/mypf1.jpg'%}" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-lg-8 content">
+                        <h2>Features to Build Your Resume</h2>
+                        <p class="fst-italic py-3">
+                            Explore powerful features designed to help you create a professional, 
+                            standout resume with ease and customization.
+                        </p>
+                        <div class="row">
+                            <div class="col-12">
+                                <ul>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Predefined Templates :</strong> <span>Choose from professionally 
+                                        designed resume and CV templates.</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Easy Customization :</strong>
+                                        <span>Edit layouts, fonts, colors, and sections to match your style.</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Download in Word & PDF :</strong> <span>Download in 
+                                        Word & PDF.</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Error-Free Formatting :</strong> <span>Well-structured resumes 
+                                        with perfect alignment.</span></li>
+                                    <li><i class="bi bi-chevron-right"></i> <strong>Save & Edit Anytime :</strong> <span>Update your resume 
+                                        whenever you need.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+            </div>
+
+        </section><!-- /About Section -->
+
+        <!-- Stats Section -->
+        
+
+        <!-- Skills Section -->
+        
+
+        <!-- Resume Section -->
+        
+
+        <!-- Portfolio Section -->
+        
+
+        <!-- Services Section -->
+        
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials section light-background">
+
+            <!-- Section Title -->
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Testimonials</h2>
+                <p>Empowering your career with professionally crafted resumes and CVs</p>
+            </div><!-- End Section Title -->
+
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="swiper init-swiper">
+                    <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              },
+              "breakpoints": {
+                "320": {
+                  "slidesPerView": 1,
+                  "spaceBetween": 40
+                },
+                "1200": {
+                  "slidesPerView": 3,
+                  "spaceBetween": 1
+                }
+              }
+            }
+          </script>
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>The variety of templates and customization options allowed me to create a resume that truly reflected my style and profession. I got compliments on my resume during interviews!</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                                <img src="{%static 'Main/assets/img/testimonials/testimonials-1.jpg'%}"
+                                    class="testimonial-img" alt="">
+                                <h3>Saul Goodman</h3>
+                                <h4>Ceo &amp; Founder</h4>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>I needed a fresh resume for my career change, and this service provided the perfect tools to highlight my skills and experience in a new industry!</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                                <img src="{%static 'Main/assets/img/testimonials/testimonials-2.jpg'%}"
+                                    class="testimonial-img" alt="">
+                                <h3>Sara Wilsson</h3>
+                                <h4>Designer</h4>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>The customization options are fantastic! I was able to tweak my CV exactly how I wanted it, making my application stand out in a competitive job market.</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                                <img src="{%static 'Main/assets/img/testimonials/testimonials-3.jpg'%}"
+                                    class="testimonial-img" alt="">
+                                <h3>Jena Karlis</h3>
+                                <h4>Store Owner</h4>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>This resume builder made creating my resume so easy! The templates are modern and professional, and I landed interviews within days. Highly recommended!</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                                <img src="{%static 'Main/assets/img/testimonials/testimonials-4.jpg'%}"
+                                    class="testimonial-img" alt="">
+                                <h3>Matt Brandon</h3>
+                                <h4>Freelancer</h4>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>I was struggling to create my first resume, but this tool guided me step by step.</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                                <img src="{%static 'Main/assets/img/testimonials/testimonials-5.jpg'%}"
+                                    class="testimonial-img" alt="">
+                                <h3>John Larson</h3>
+                                <h4>Entrepreneur</h4>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+            </div>
+
+        </section><!-- /Testimonials Section -->
+
+    </main>
+
+    <footer id="footer" class="footer position-relative light-background">
+
+        <div class="container">
+            <div class="copyright text-center ">
+                <p>© <span>Copyright</span> <strong class="px-1 sitename">iPortfolio</strong> <span>All Rights
+                        Reserved</span></p>
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you've purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a
+                    href="https://themewagon.com">ThemeWagon</a>
+            </div>
+        </div>
+
+    </footer>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="{%static 'Main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{%static 'Main/assets/vendor/php-email-form/validate.js'%}"></script>
+    <script src="{%static 'Main/assets/vendor/aos/aos.js'%}"></script>
+    <script src="{%static 'Main/assets/vendor/typed.js/typed.umd.js'%}"></script>
+    <script src="{%static 'Main/assets/vendor/purecounter/purecounter_vanilla.js'%}"></script>
+    <script src="{%static 'Main/assets/vendor/waypoints/noframework.waypoints.js'%}"></script>
+    <script src="{%static 'Main/assets/vendor/glightbox/js/glightbox.min.js'%}"></script>
+    <script src="{%static 'Main/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js'%}"></script>
+    <script src="{%static 'Main/assets/vendor/isotope-layout/isotope.pkgd.min.js'%}"></script>
+    <script src="{%static 'Main/assets/vendor/swiper/swiper-bundle.min.js'%}"></script>
+
+    <!-- Main JS File -->
+    <script src="{%static 'Main/assets/js/main.js'%}"></script>
+
+</body>
+
+</html>

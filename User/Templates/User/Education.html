@@ -1,0 +1,205 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+        
+        body {
+            background: var(--light-color);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+        
+        .page-container {
+            max-width: 700px;
+            margin: 20px auto 20px auto;
+            position: relative;
+            left: 120px; /* Shifted more to the right */
+        }
+        
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .card-body {
+            padding: 20px;
+            background: white;
+        }
+        
+        .form-control {
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            transition: 0.3s ease;
+        }
+        
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.25);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-submit {
+            background-color: #28a745 !important;
+            border-color: #28a745 !important;
+            width: auto;
+            padding: 8px 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+            color: white !important;
+        }
+        .btn-submit:hover {
+            background-color: #3a7dd1 !important;
+            border-color: #3a7dd1 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        .btn-continue {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+            width: auto;
+            padding: 14px 20px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+            color: white !important;
+        }
+
+        .btn-continue:hover {
+            background-color: #3652c1 !important;
+            border-color: #3652c1 !important;
+        }
+    </style>
+
+<script>
+    $(document).ready(function() {
+        $("#sel_education").change(function () {
+            var did = $(this).val();
+            var ur = "{% url 'User:ajaxcourse' %}";
+            
+            $("#sel_course").html('<option>Loading courses...</option>');
+            
+            $.ajax({
+                url: ur,
+                data: { did: did },
+                success: function (data) {
+                    $("#sel_course").html(data);
+                },
+                error: function() {
+                    $("#sel_course").html('<option value="">Error loading courses</option>');
+                }
+            });
+        });
+    });
+</script>
+</head>
+<body>
+    <div class="page-container">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="text-center mb-3" style="color: var(--primary-color);">Education Profile</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label required-field">Institution</label>
+                        <input type="text" name="txt_institution" class="form-control" placeholder="Enter institution name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label required-field">Education Category</label>
+                        <select name="sel_education" id="sel_education" class="form-control">
+                            <option value="">--Select Education Level--</option>
+                            {% for i in educationtype %}
+                            <option value="{{ i.id }}">{{ i.educationtype }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label required-field">Field of Study</label>
+                        <select name="sel_course" id="sel_course" class="form-control">
+                            <option value="">--Select Course--</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label required-field">Start Date</label>
+                        <input type="date" name="txt_Startdate" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label required-field">End Date</label>
+                        <input type="date" name="txt_Enddate" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-save me-2"></i> Save Education
+                    </button>
+                    <div class="text-center mt-3">
+                        <a href="{% url 'User:Experience' %}" class="btn btn-continue">
+                            Continue to Experience <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h3 class="text-center">Your Education History</h3>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Institution</th>
+                            <th>Category</th>
+                            <th>Course</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for edu in education %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ edu.Education_Institution }}</td>
+                            <td>{{ edu.Education_Course.educationtype.educationtype }}</td>
+                            <td>{{ edu.Education_Course.course }}</td>
+                            <td>{{ edu.Education_StartDate }}</td>
+                            <td>{{ edu.Education_EndDate }}</td>
+                            <td>
+                                <a href="{% url 'User:deleteeducation' edu.id %}" class="btn btn-outline-danger btn-sm">
+                                    <i class="fas fa-trash"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7" class="text-center text-muted py-3">
+                                <i class="fas fa-info-circle me-2"></i>No education records found.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}

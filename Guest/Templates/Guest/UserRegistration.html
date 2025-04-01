@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserRegistration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f7fc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="submit"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #100101;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #1448e3;
+            color: rgb(240, 242, 235);
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+            <h2>User Registration</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table border="3">
+            <tr>
+                <td>Photo</td>
+                <td><input type="file" name="file_photo" required></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                    <td><input type="text" name="txt_name" placeholder="Enter name" required></td>
+                </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" name="txt_email" placeholder="Enter email" required></td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="text" name="txt_con" placeholder="Enter Contact" required></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="txt_pass" placeholder="Enter password" required></td>
+            </tr>
+            <tr>
+            <td> confirmPassword</td>
+            <td><input type="password" name="txt_cpass" placeholder="Enter confirm password" required></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                <input type="submit" name="btn_submit" value="submit"></td>
+            </tr>
+    
+</body>
+</html>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+    window.location="{% url 'Guest:UserRegistration' %}"
+</script>
+{% endif %}

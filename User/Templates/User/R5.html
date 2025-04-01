@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Card Style</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #e9ecef;
+            color: #2d3436;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .resume-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: #dfe6e9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .card h2, .card h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #0984e3;
+        margin-bottom: 10px;
+        }
+
+
+        .profile-card {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .profile-card img:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-card h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2d3436;
+        }
+
+        .profile-card p {
+            font-size: 14px;
+            color: #636e72;
+        }
+
+        .sidebar-section {
+            margin-bottom: 25px;
+        }
+
+        .sidebar-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0984e3;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #b2bec3;
+            padding-bottom: 5px;
+        }
+
+        .sidebar-section ul {
+            list-style: none;
+        }
+
+        .sidebar-section ul li {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #2d3436;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-list li::before {
+            content: '•';
+            color: #0984e3;
+            font-size: 20px;
+        }
+
+        .contact-list a {
+            color: #0984e3;
+            text-decoration: none;
+        }
+
+        .contact-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 20px;
+        }
+
+        .card {
+            background: #f7f9fb;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0984e3;
+            margin-bottom: 10px;
+        }
+
+        .card-item {
+            margin-bottom: 15px;
+        }
+
+        .card-item h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3436;
+        }
+
+        .card-item .date {
+            font-size: 13px;
+            color: #636e72;
+            margin-bottom: 5px;
+        }
+
+        .card-item p {
+            font-size: 14px;
+        }
+
+        .card-item a {
+            color: #0984e3;
+            text-decoration: none;
+        }
+
+        .card-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Print Button */
+        .print-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 25px;
+            background: #0984e3;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .print-button:hover {
+            background: #0773c4;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 700px) {
+            .resume-wrapper {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+
+            .profile-card img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .profile-card h1 {
+                font-size: 20px;
+            }
+
+            .card {
+                padding: 10px;
+            }
+        }
+        @media print {
+    body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+@media print {
+    .resume {
+        page-break-after: always; /* Ensures full-page printing */
+    }
+    .resume_left, .resume_right {
+        page-break-inside: avoid;
+    }
+}
+@page {
+    size: A4;
+    margin: 10mm;
+}
+        @media print {
+            body, html {
+                margin: 0;
+                padding: 0;
+                background-color: white;
+            }
+            .print-button {
+                display: none;
+            }
+            .page {
+                box-shadow: none;
+                width: 100%;
+                min-height: 0;
+                height: auto;
+                margin: 0;
+            }
+            .left, .right {
+                page-break-inside: avoid;
+            }
+            @page {
+                size: A4;
+                margin: 0mm;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button" onclick="printCV()">Print Resume</button>
+
+    <div class="resume-wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="profile-card">
+                <img src="{{ user.UserRegistration_photo.url | default:'https://via.placeholder.com/100' }}" alt="Profile Pic">
+                <h1>{{ user.UserRegistration_name }}</h1>
+                <p>{{ user.Designation }}</p>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Contact</h3>
+                <ul class="contact-list">
+                    <li><a href="tel:{{ user.UserRegistration_contact }}">{{ user.UserRegistration_contact }}</a></li>
+                    <li><a href="mailto:{{ user.UserRegistration_email }}">{{ user.UserRegistration_email }}</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Skills</h3>
+                <ul>
+                    {% for skill in skills %}
+                    <li>{{ skill.skill_name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Hobbies</h3>
+                <ul>
+                    {% for hobby in hobbies %}
+                    <li>{{ hobby.hobbies_name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="card">
+                <h2>About Me</h2>
+                {% for about in about %}
+                <div class="card-item">
+                    <h4>{{ about.about_name }}</h4>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="card">
+                <h2>Experience</h2>
+                {% for exp in experience %}
+                <div class="card-item">
+                    <h4>{{ exp.Experience_Jobtitle }} at {{ exp.Experience_Companyname }}</h4>
+                    <div class="date">{{ exp.Experience_Startdate }} - {{ exp.Experience_Enddate }}</div>
+                    <p>{{ exp.Experience_Description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="card">
+                <h2>Education</h2>
+                {% for edu in education %}
+                <div class="card-item">
+                    <h4>{{ edu.Education_Institution }}</h4>
+                    <h5>{{ edu.Education_Course.educationtype.educationtype}}- {{ edu.Education_Course.course}} </h5>
+                    <div class="date">{{ edu.Education_StartDate }} - {{ edu.Education_EndDate }}</div>
+                    <p>{{ edu.Education_Graduation }}</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="card">
+                <h2>Projects</h2>
+                {% for project in projects %}
+                <div class="card-item">
+                    <h4>{{ project.Project_Name }}</h4>
+                    <p>{{ project.Project_Details }}</p>
+                    <a href="{{ project.Project_Link }}" target="_blank">View Project</a>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="card">
+                <h3>Certificates</h3>
+                {% for certificate in certificates %}
+                <div class="card-item">
+                    <h4>{{ certificate.certificate_name }}</h4>
+                    {% if certificate.certificate_upload %}
+                    <a href="{{ certificate.certificate_upload.url }}" target="_blank">Download</a>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="card">
+                <h3>Languages</h3>
+                <div class="card-item"></div>
+                
+                  {% for lang in languages %}
+                    <h4>{{ lang.language_name }} ({{ lang.language_level }})</h4>
+                   {% endfor %}
+             
+            </div>
+
+            <div class="card">
+                <h2>References</h2>
+                {% for reference in references %}
+                <div class="card-item">
+                    <h4>{{ reference.reference_name }}</h4>
+                    <p>{{ reference.reference_relation }}</p>
+                    <p>Email: {{ reference.reference_email }}</p>
+                    <p>Phone: {{ reference.reference_contact }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script>
+        function printCV() {
+            window.print();
+        }
+    </script>
+</body>
+</html>

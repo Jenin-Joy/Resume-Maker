@@ -1,0 +1,104 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin-top: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Curriculum Vitae</h1>
+        <form method="post">
+            {% csrf_token %}
+            <table class="table table-bordered table-striped">
+                <tr class="table-primary text-center">
+                    <td colspan="2"><h2>Personal Details</h2></td>
+                </tr>
+                <tr>
+                    <td><h5>Name</h5></td>
+                    <td><input type="text" class="form-control" name="txt_name"></td>
+                </tr>
+                <tr>
+                    <td><h5>Email</h5></td>
+                    <td><input type="email" class="form-control" name="txt_email"></td>
+                </tr>
+                <tr>
+                    <td><h5>Contact</h5></td>
+                    <td><input type="text" class="form-control" name="txt_contact"></td>
+                </tr>
+                <tr>
+                    <td><h5>Address</h5></td>
+                    <td><textarea class="form-control" rows="3" name="txt_address"></textarea></td>
+                </tr>
+                <tr>
+                    <td><h5>About Me</h5></td>
+                    <td><textarea class="form-control" rows="3" name="txt_about"></textarea></td>
+                </tr>
+                <tr class="table-primary text-center">
+                    <td colspan="2"><h2>Professional Details</h2></td>
+                </tr>
+                <tr>
+                    <td><h5>Education</h5></td>
+                    <td><textarea class="form-control" rows="3" name="txt_education"></textarea></td>
+                </tr>
+                <tr>
+                    <td><h5>Experience</h5></td>
+                    <td><textarea class="form-control" rows="3" name="txt_experience"></textarea></td>
+                </tr>
+                <tr>
+                    <td><h5>Skills</h5></td>
+                    <td><textarea class="form-control" rows="3" name="txt_skill"></textarea></td>
+                </tr>
+                <tr>
+                    <td><h5>Hobbies</h5></td>
+                    <td><textarea class="form-control" rows="3" name="txt_hobbies"></textarea></td>
+                </tr>
+                <tr>
+                    <td><h5>References</h5></td>
+                    <td><textarea class="form-control" rows="3" name="txt_references"></textarea></td>
+                </tr>
+                <tr>
+                    <td><h5>Languages</h5></td>
+                    <td><textarea class="form-control" rows="3" name="txt_language"></textarea></td>
+                </tr>
+                <tr>
+                    <td><h5>Projects</h5></td>
+                    <td><textarea class="form-control" rows="3" name="txt_project"></textarea></td>
+                </tr>
+                <tr>
+                    <td><h5>Certifications</h5></td>
+                    <td><textarea class="form-control" rows="3" name="txt_certificate"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <button type="submit" class="btn btn-primary">SUBMIT</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock content %}

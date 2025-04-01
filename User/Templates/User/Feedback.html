@@ -1,0 +1,117 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="feedback-container animate-form">
+        <h2 class="text-center mb-3">We Value Your Feedback!</h2>
+        <p class="text-center text-muted">Help us improve by sharing your thoughts.</p>
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label class="form-label">Your Name</label>
+                <input type="text" name="txt_name" class="form-control highlight-input" placeholder="John Doe" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Your Email</label>
+                <input type="email" name="txt_email" class="form-control highlight-input" placeholder="example@email.com" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Your Feedback</label>
+                <textarea name="txt_message" class="form-control highlight-input" rows="4" placeholder="Write your feedback here..." required></textarea>
+            </div>
+
+            <button type="submit" name="btn_submit" class="btn btn-primary btn-custom">Submit Feedback</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* General Styling */
+    body {
+        background-color: #ffffff;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Feedback Form Container */
+    .feedback-container {
+        max-width: 500px;
+        margin: 60px auto;
+        padding: 25px;
+        background: #ffffff;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        text-align: center;
+        border: 2px solid transparent;
+        transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .feedback-container:hover {
+        border-color: #007bff;
+        box-shadow: 0px 4px 20px rgba(0, 123, 255, 0.3);
+    }
+
+    /* Animation */
+    .animate-form {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Form Input Highlight */
+    .form-label {
+        font-weight: 600;
+        color: #333;
+        text-align: left;
+        display: block;
+    }
+
+    .form-control {
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        font-size: 16px;
+        transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .highlight-input:focus {
+        border-color: #007bff;
+        box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.4);
+    }
+
+    /* Submit Button */
+    .btn-custom {
+        width: 100%;
+        font-size: 18px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #007bff;
+        color: white;
+        font-weight: bold;
+        border: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-custom:hover {
+        background: #0056b3;
+        transform: translateY(-3px);
+        box-shadow: 0px 5px 15px rgba(0, 123, 255, 0.3);
+    }
+
+</style>
+
+{% endblock content %}

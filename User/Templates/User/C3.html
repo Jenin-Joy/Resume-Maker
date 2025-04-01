@@ -1,0 +1,293 @@
+<head>
+  <title>Your Name Resume</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- link normalize here-->
+   <style>
+      html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,
+      b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,time, mark, audio, video {
+          margin: 0;
+          padding: 0;
+          border: 0;
+          font-size: 100%;
+          font: inherit;
+          vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers - don't include RESET.css in the projects (exept codepen(?)), use NORMALIZE.css only*/
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+display: block;
+}
+body {
+line-height: 1;
+}
+ol, ul {
+list-style: none;
+}
+blockquote, q {
+quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+content: '';
+content: none;
+}
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+@import url(https://fonts.googleapis.com/css?family=Raleway:500);
+
+
+body {
+    width: 210mm;  /* A4 width */
+    height: 297mm; /* A4 height */
+    margin: auto;
+    background-color: white;
+    padding: 20mm; /* Add padding to prevent content from touching the edges */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Optional for a professional look */
+}
+
+p, ul {
+font-family: 'Raleway', sans-serif;
+}
+
+.container {
+margin-bottom: 25px;
+}
+
+
+.info-details{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.title-name {
+  color: #3EDFD0;
+  display: inline-block;
+  font-size: 25px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding-bottom: 1%;
+}
+
+.contact-info, .links-container {
+  color: #808284;
+  font-size: 16px;
+  letter-spacing: 1.2px;
+}
+
+.contact-info {
+  padding-bottom: 5%;
+  padding-top: 2%;
+}
+
+.links {
+  text-decoration: none;
+  color: inherit;
+  color: #58585B;
+  display: inline-block;
+}
+
+.links:hover {
+  color: #3EDFD0;
+}
+
+.primary-titles {
+  color: #3EDFD0;
+  display: inline-block;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  padding-top: 10px;
+}
+
+
+.location {
+color: #808284;
+display: inline-block;
+font-size: 13px;
+letter-spacing: 2px;
+}
+
+.category-titles {
+color: #3EDFD0;
+font-size: 16px;
+letter-spacing: 2px;
+text-transform: uppercase;
+margin-bottom: 5px;
+}
+
+.category-details {
+  color: #808284;
+  font-size: 13px;
+  padding-top: 10px;
+padding-bottom: 15px;
+}
+
+.category-description-main {
+color: #808284;
+font-size: 13px;
+line-height: 18px;
+padding-top: 10px;
+}
+
+.category-description {
+  color: #808284;
+  font-size: 13px;
+  line-height: 18px;
+  padding-top: 10px;
+padding-bottom: 15px;
+}
+
+
+hr {
+border: 1px dotted #A7A9AB;
+border-style: none none dotted; 
+margin: 0 5% 0 0;
+}
+@media only screen and (min-width: 480px) {
+  .primary-tites {
+      font-size: 16px;
+      line-height: 16px;
+      letter-spacing: 1px;
+      text-decoration: none;
+
+      
+  }
+}
+/* .category-description {
+
+} */
+
+
+@media only screen and (max-width: 500px) {
+  .prof-expirience {
+      margin-top: 10%;
+}
+}
+@media print {
+            body, html {
+                margin: 0;
+                padding: 0;
+                background-color: white;
+            }
+            .print-button {
+                display: none;
+            }
+            .page {
+                box-shadow: none;
+                width: 100%;
+                min-height: 0;
+                height: auto;
+                margin: 0;
+            }
+            .left, .right {
+                page-break-inside: avoid;
+            }
+            @page {
+                size: A4;
+                margin: 0mm;
+            }
+        }
+   </style>
+</head>
+<body>
+  <button class="print-button" onclick="printCV()">Print CV</button>
+  <header class="info-details">
+      <h1 class="title-name">{{ cv.cv_name }}</h1>
+      <br/>
+      <!-- Social links could be added to model if needed, static for now -->
+      <a class="links" href="#"><i class="fa fa-github fa-2x"> |</i></a>
+      <a class="links" href="#"><i class="fa fa-codepen fa-2x"> |</i></a>
+      <a class="links" href="#"><i class="fa fa-safari fa-2x"></i></a>
+      <br/>
+      <div class="contact-info">
+          <a class="links" href="mailto:{{ cv.cv_email }}">{{ cv.cv_email }}</a>
+      </div>
+  </header><!-- info details -->
+  <!-- <div class="page">
+    <div class="center">
+      <img src="{{cv.user.UserRegistration_photo.url}}" alt="">
+    
+    </div>
+  </div> -->
+
+  <section class="main-content">
+      <div class="container">
+          <h2 class="category-titles">Summary</h2><hr>
+          <p>{{ cv.cv_about }}</p>
+      </div>
+      <!-- Summary -->
+
+      <div class="container">
+          <h2 class="category-titles">Skills</h2><hr>
+          <!-- <div class="category-description"> -->
+            <p>{{ cv.cv_skill }}</p>
+          </div>
+      </div>
+      <!-- Skills -->
+      
+      <div class="container">
+          <h2 class="category-titles">Experience</h2><hr>
+          <p>{{ cv.cv_experience}}</p>
+      </div>
+      <!-- Projects -->
+
+      <!-- <div class="container">
+          <h2 class="category-titles">Professional Experience</h2><hr>
+          <p>{{ cv.cv_experienece }}</p> -->
+          <!-- <p class="primary-titles prof-expirience">Previous Employment <span class="location">| {{ cv.cv_address }}</span></p>
+          <p class="category-details">Dates not specified</p>
+          <p class="category-description">{{ cv.cv_experience }}</p> -->
+      <!-- </div> -->
+      <!-- Professional Experience -->
+      
+      <div class="container">
+          <h2 class="category-titles">Education</h2><hr>
+          <p>{{ cv.cv_education }}</p>
+          <!-- <p class="primary-titles">{{ cv.cv_education }} <span class="location">| {{ cv.cv_address }}</span></p>
+          <p class="category-details">Dates not specified</p> -->
+      </div>
+      <div class="container">
+        <h2 class="category-titles">Projects</h2><hr>
+        <p>{{ cv.cv_project }}</p>
+        <!-- <p class="primary-titles">{{ cv.cv_education }} <span class="location">| {{ cv.cv_address }}</span></p>
+        <p class="category-details">Dates not specified</p> -->
+    </div>
+    <div class="container">
+      <h2 class="category-titles">Languages</h2><hr>
+      <p>{{ cv.cv_language }}</p>
+      <!-- <p class="primary-titles">{{ cv.cv_education }} <span class="location">| {{ cv.cv_address }}</span></p>
+      <p class="category-details">Dates not specified</p> -->
+  </div>
+  <div class="container">
+    <h2 class="category-titles">Hobbies</h2><hr>
+    <p>{{ cv.cv_hobbies }}</p>
+    <!-- <p class="primary-titles">{{ cv.cv_education }} <span class="location">| {{ cv.cv_address }}</span></p>
+    <p class="category-details">Dates not specified</p> -->
+  </div>
+  <div>
+    <div class="container">
+      <h2 class="category-titles">Reference</h2><hr>
+      <p>{{ cv.cv_reference }}</p>
+  </div>
+  <div>
+    <div class="container">
+      <h2 class="category-titles">Certificates</h2><hr>
+      <p>{{ cv.cv_certificate}}</p>
+  </div>
+  <div class="container">
+    <h2 class="category-titles">Address</h2><hr>
+    <p>{{ cv.cv_address }}</p>
+</div>
+      <!-- Education -->
+  </section><!-- main content -->
+  <script>
+    function printCV() {
+        window.print();
+    }
+</script>
+</body>

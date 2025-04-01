@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV</title>
+    <style>
+        body, html {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            background-color: #c9c9cb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        
+        .print-button {
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        .page {
+            display: flex;
+            width: 794px; /* A4 width in pixels at 96dpi */
+            min-height: 1000px; /* A4 height in pixels at 96dpi */
+            background-color: #f0f0f0;
+            box-shadow: -2px 20px 20px rgba(0, 0, 0, 0.3), -4px 10px 40px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .left {
+            background: linear-gradient(#333, #222);
+            width: 30%;
+            color: #eee;
+            padding: 25px;
+            box-sizing: border-box;
+        }
+        
+        .name {
+            text-align: center;
+        }
+        
+        .name img {
+            max-width: 150px;
+            border-radius: 50%;
+            margin: 20px 0;
+            border: 2px solid rgba(240, 240, 240, 0.2);
+        }
+        
+        .divider {
+            width: 100%;
+            height: 2px;
+            background-color: rgba(240, 240, 240, 0.2);
+            margin: 20px 0;
+        }
+        
+        .right {
+            flex: 1;
+            padding: 30px;
+            color: #111;
+            box-sizing: border-box;
+        }
+        
+        .right h3:after {
+            content: "";
+            display: block;
+            height: 2px;
+            background-color: #333;
+            margin-top: 5px;
+            width: 50px;
+        }
+        
+        .link {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        @media print {
+    body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+@media print {
+    .resume {
+        page-break-after: always; /* Ensures full-page printing */
+    }
+    .resume_left, .resume_right {
+        page-break-inside: avoid;
+    }
+}
+@page {
+    size: A4;
+    margin: 10mm;
+}
+
+        @media print {
+            body, html {
+                margin: 0;
+                padding: 0;
+                background-color: white;
+            }
+            .print-button {
+                display: none;
+            }
+            .page {
+                box-shadow: none;
+                width: 100%;
+                min-height: 0;
+                height: auto;
+                margin: 0;
+            }
+            .left, .right {
+                page-break-inside: avoid;
+            }
+            @page {
+                size: A4;
+                margin: 0mm;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-button" onclick="printCV()">Print CV</button>
+    <div class="page">
+        <div class="left">
+            <div class="name">
+                <img src="{{cv.user.UserRegistration_photo.url}}" alt="Profile Photo">
+                <h1>{{ cv.cv_name }}</h1>
+                <h3>{{ cv.cv_email }}</h3>
+                <h3>{{ cv.cv_contact }}</h3>
+            </div>
+            <div class="divider"></div>
+            <div class="skills">
+                <h3>Skills</h3>
+                <p>{{ cv.cv_skill }}</p>
+            </div>
+            <div class="divider"></div>
+            <div class="hobbies">
+                <h3>Hobbies</h3>
+                <p>{{ cv.cv_hobbies }}</p>
+            </div>
+        </div>
+        <div class="right">
+            <div class="about">
+                <h3>About Me</h3>
+                <p>{{ cv.cv_about }}</p>
+            </div>
+            <div class="education">
+                <h3>Education</h3>
+                <p>{{ cv.cv_education }}</p>
+            </div>
+            <div class="experience">
+                <h3>Experience</h3>
+                <p>{{ cv.cv_experience }}</p>
+            </div>
+            <div class="projects">
+                <h3>Projects</h3>
+                <p>{{ cv.cv_project }}</p>
+            </div>
+            <div class="certificates">
+                <h3>Certificates</h3>
+                <p>{{ cv.cv_certificate }}</p>
+            </div>
+            <div class="contact">
+                <h3>Address</h3>
+                <p>{{ cv.cv_address }}</p>
+            </div>
+            <div class="contact">
+                <h3>References</h3>
+                <p>{{ cv.cv_reference }}</p>
+            </div>
+            <div class="contact">
+                <h3>Languages</h3>
+                <p>{{ cv.cv_language }}</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function printCV() {
+            window.print();
+        }
+    </script>
+</body>
+</html>

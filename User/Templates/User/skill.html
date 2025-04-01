@@ -1,0 +1,214 @@
+{% extends 'User/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4CAF50;
+            --danger-color: #f44336;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: var(--dark-color);
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 20px auto 20px auto;
+            position: relative;
+            left: 120px; /* Shifted more to the right */
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .skills-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .btn-add, .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .btn-add:hover, .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .table-container {
+            margin-top: 30px;
+        }
+
+        .btn-delete {
+            color: var(--danger-color);
+            border: 1px solid var(--danger-color);
+            background: none;
+        }
+
+        .btn-delete:hover {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .card-body {
+            padding: 20px;
+            background: white;
+        }
+        .btn-submit {
+            background-color: #28a745 !important;
+            border-color: #28a745 !important;
+            width: auto;
+            padding: 8px 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+            color: white !important;
+        }
+        .btn-submit:hover {
+            background-color: #3a7dd1 !important;
+            border-color: #3a7dd1 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        .btn-continue {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+            width: auto;
+            padding: 14px 20px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+            color: white !important;
+        }
+
+        .btn-continue:hover {
+            background-color: #3652c1 !important;
+            border-color: #3652c1 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="text-center mb-3" style="color: var(--primary-color);">Add Your Skills</h1>
+                <form method="post">
+                    {% csrf_token %}
+                     <ul class="skills-list">
+                    <li>Computer Skills <button type="button" class="btn-add" onclick="addSkill('Computer Skills')">
+                    <i class="fas fa-plus"></i>
+                     </button></li>
+                    <li>Public Speaking <button type="button" class="btn-add" onclick="addSkill('Public Speaking')">
+                    <i class="fas fa-plus"></i>
+                    </button></li>
+                    <li>Organizational Skills <button type="button" class="btn-add" onclick="addSkill('Organizational Skills')">
+                    <i class="fas fa-plus"></i>
+                    </button></li>
+                    <li>Clerical Support <button type="button" class="btn-add" onclick="addSkill('Clerical Support')">
+                    <i class="fas fa-plus"></i>
+                    </button></li>
+                    <li>Python Programming <button type="button" class="btn-add" onclick="addSkill('Python Programming')">
+                    <i class="fas fa-plus"></i>
+                    </button></li>
+                    <li>Web Development <button type="button" class="btn-add" onclick="addSkill('Web Development')">
+                    <i class="fas fa-plus"></i>
+                    </button></li>
+                    <li>Database Management <button type="button" class="btn-add" onclick="addSkill('Database Management')">
+                    <i class="fas fa-plus"></i>
+                    </button></li>
+                    <li>Cybersecurity <button type="button" class="btn-add" onclick="addSkill('Cybersecurity')">
+                    <i class="fas fa-plus"></i>
+                    </button></li>
+                    <li>Cloud Computing <button type="button" class="btn-add" onclick="addSkill('Cloud Computing')">
+                    <i class="fas fa-plus"></i>
+                    </button></li>
+                    <li>Data Analysis <button type="button" class="btn-add" onclick="addSkill('Data Analysis')">
+                    <i class="fas fa-plus"></i>
+                    </button></li>
+                    </ul>
+                    <div class="mb-3">
+                         <label class="form-label">Your Skills</label>
+                        <textarea id="skillsTextarea" name="txt_content" class="form-control" placeholder="Type or add skills here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-save me-2"></i> Save Skills
+                    </button>
+                    <div class="text-center mt-3">
+                        <a href="{% url 'User:Hobbies' %}" class="btn btn-continue">
+                            Continue to  Hobbies<i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+
+        <div class="card">
+            <div class="card-body"></div>
+                <h3 class="text-center">Your Skills List</h3>
+                <table class="table table-bordered">
+                <thead>
+                    <tr>
+                       <th>#</th>
+                       <th>Skill Name</th>
+                      <th>Actions</th>
+                    </tr>
+                </thead>
+                 <tbody>
+                {% for skill in skills %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ skill.skill_name }}</td>
+                    <td><a href="{% url 'User:delete_skill' skill.id %}" class="btn btn-delete">Delete</a></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="text-center">No skills added yet.</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+             </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        function addSkill(skill) {
+            let textarea = document.getElementById("skillsTextarea");
+            textarea.value += textarea.value ? ", " + skill : skill;
+        }
+    </script>
+</body>
+</html>
+{% endblock content %}

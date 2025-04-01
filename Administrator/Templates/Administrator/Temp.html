@@ -1,0 +1,160 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        /* Background and text styling */
+        body {
+            background-color: #f5e5bb;
+            text-align: center;
+        }
+        /* Page heading */
+        h2 {
+            margin-top: 30px;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+        }
+        /* Container */
+        .container {
+            margin-top: 20px;
+        }
+        /* Template card styling */
+        .template-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+            padding: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .template-card img {
+            border-radius: 10px;
+            width: 100%;
+            height: 350px; /* Ensures uniform size */
+            object-fit: cover; /* Ensures full image visibility */
+            background-color: #fff;
+            padding: 5px;
+        }
+        .template-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        /* Row styling */
+        .row {
+            margin-top: 20px;
+        }
+        /* Home button */
+        .home-icon-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #007bff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+        }
+        .home-icon-container:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            background-color: #0056b3;
+        }
+        .home-icon {
+            font-size: 2rem;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Resume Templates</h2>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="{% url 'User:R1' %}" class="template-card d-block">
+                    <img src="{% static 'Resume/R1.jpg' %}" alt="Resume 1">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="{% url 'User:R2' %}" class="template-card d-block">
+                    <img src="{% static 'Resume/R2.jpg' %}" alt="Resume 2">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="{% url 'User:R3' %}" class="template-card d-block">
+                    <img src="{% static 'Resume/R3.jpg' %}" alt="Resume 3">
+                </a>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="{% url 'User:R4' %}" class="template-card d-block">
+                    <img src="{% static 'Resume/R4.jpg' %}" alt="Resume 4">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="{% url 'User:R5' %}" class="template-card d-block">
+                    <img src="{% static 'Resume/R5.jpg' %}" alt="Resume 5">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <h2>CV Templates</h2>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="{% url 'User:C1' %}" class="template-card d-block">
+                    <img src="{% static 'Resume/C1.jpg' %}" alt="CV 1">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="{% url 'User:C2' %}" class="template-card d-block">
+                    <img src="{% static 'Resume/C2.jpg' %}" alt="CV 2">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="{% url 'User:C3' %}" class="template-card d-block">
+                    <img src="{% static 'Resume/C3.jpg' %}" alt="CV 3">
+                </a>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="{% url 'User:C4' %}" class="template-card d-block">
+                    <img src="{% static 'Resume/C4.jpg' %}" alt="CV 4">
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="{% url 'User:C5' %}" class="template-card d-block">
+                    <img src="{% static 'Resume/C5.jpg' %}" alt="CV 5">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Icon -->
+    <a href="{% url 'User:Homepage' %}" class="home-icon-container">
+        <i class="bi bi-house-fill home-icon"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
